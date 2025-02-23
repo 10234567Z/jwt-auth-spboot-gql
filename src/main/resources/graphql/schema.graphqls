@@ -1,0 +1,38 @@
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    password: String!
+    roles: [Role!]!
+}
+
+type Role {
+    id: ID!
+    name:RoleType!
+}
+
+type Query {
+    userById(id: ID): User
+    roleById(id: ID): Role
+}
+
+type Mutation {
+    loginWithUsername(username: String!, password: String!): AuthPayload
+    signUp(username: String!, email: String!, password: String!, roles: [String!]!): SignUpPayload
+}
+
+type SignUpPayload {
+    message: String!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
+    type: String!
+}
+
+enum RoleType{
+    ROLE_USER,
+    ROLE_MODERATOR,
+    ROLE_ADMIN
+}
